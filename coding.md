@@ -78,3 +78,48 @@ void recoverTree(TreeNode* root) {
     swap(f1->val, f2->val);
 }
 ```
+
+#### Next Permutation
+```
+void nextPermutation(vector<int>& nums) {
+    int size = nums.size();
+    int target = size - 2;
+    while(target >= 0 && nums[target] >= nums[target + 1]) target--;
+    if(target >= 0) {
+        int larger = size - 1;
+        while(nums[target] >= nums[larger]) larger--;
+        swap(nums[target], nums[larger]);
+    }
+    reverse(nums.begin() + target + 1, nums.end());
+}
+```
+
+#### Trapping Rain Water
+```
+int trap(vector<int>& height) {
+    int l = 0, r = height.size() - 1;
+    while (l < height.size() &&height[l] == 0) l++;
+    if (l == height.size()) return 0;
+    while (height[r] == 0) r--;
+    int low = min(height[l], height[r]);
+    int res = 0;
+    while (l < r) {
+        if (height[l] <= height[r]) {
+            if (height[l] > low) {
+                low = height[l];
+            } else {
+                res += low - height[l];
+            }
+            l++;
+        } else {
+            if (height[r] > low) {
+                low = height[r];
+            } else {
+                res += low - height[r];
+            }
+            r--;
+        }
+    }
+    return res;
+}
+```
