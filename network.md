@@ -7,7 +7,14 @@
 ![](https://raw.githubusercontent.com/HIT-Alibaba/interview/master/img/tcp-connection-closed-four-way-handshake.png)
 
 #### 3. 浏览器从输入url到返还的过程
-
+- DHCP配置主机信息
+- ARP解析路由器MAC地址
+- 转发DNS报文至DNS server
+- 建立TCP连接
+- 发送HTTP请求
+- 服务器处理请求并返回HTTP报文
+- 浏览器渲染内容
+- 结束连接
 
 #### 4. TCP和UDP的区别
 - TCP需要建立连接；UDP不需要
@@ -39,7 +46,10 @@
 通过修改nginx.conf里的http{}相关配置
 
 #### 10. DNS的过程及实现方式
-
+- 用户运行dns客户端
+- 浏览器从接收到的url中提取域名，并将这个主机名发送给dns应用的客户端
+- dns客户端向dns服务器发送查询报文
+- dns客户端收到回应，包含该主机名对应的ip地址
 
 #### 11. HTTP和HTTPS区别
 - https需要到ca申请证书，一般免费证书较少，需要付费
@@ -69,4 +79,17 @@ TCP时延由延时确认机制导致。比如请求数据的时候，数据非�
 #### 15. Nagle算法
 每次相应的数据包要凑够固定大小，Linux默认为1500字节
 
-<!-- #### 16.  -->
+#### 16. HTTP/1.x和HTTP/2.0
+- HTTP/1.x缺点
+    - 需要多个TCP连接实现并发和缩短延迟
+    - 不压缩请求和响应头部
+    - 不支持有效的资源优先级，使底层TCP连接的利用率低下
+- HTTP/2.0
+    - 将报文分成HEADERS和DATA
+    - 只有一个TCP连接，承载了任意数量的双向数据流
+    - 每个strema都有一个唯一标识符和可选的优先级信息
+    - 帧(frame)是最小通信单位
+    - 在客户端请求资源时，会把相关资源一起发给客户端
+    - 要求Server与Client同时维护首部字段表，避免重复传输
+
+<!-- #### 17.  -->
